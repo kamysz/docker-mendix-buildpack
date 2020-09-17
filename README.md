@@ -45,6 +45,7 @@ Before running the container, it is necessary to build the image with your appli
 docker build 
   --build-arg BUILD_PATH=<mendix-project-location> \
   --build-arg ROOTFS_IMAGE=<root-fs-image-tag> \
+  --build-arg BUILDER_ROOTFS_IMAGE=<root-fs-image-tag> \
   --build-arg CF_BUILDPACK=<cf-buildpack-version> \
   --tag mendix/mendix-buildpack:v1.2 .
 ```
@@ -53,6 +54,7 @@ For build you can provide next arguments:
 
 - **BUILD_PATH** indicates where the application model is located. It is a root directory of an unzipped .MDA or .MPK file. In the latter case, this is the directory where your .MPR file is located. Must be within [build context](https://docs.docker.com/engine/reference/commandline/build/#extended-description). Defaults to `./project`.
 - **ROOTFS_IMAGE** is a type of rootfs image. Defaults to `mendix/rootfs:bionic`. To use Ubuntu 14.04, change this to `mendix/rootfs:trusty`. It's also possible to use a custom rootfs image as described in [Advanced feature: full-build](#advanced-feature-full-build).
+- **BUILDER_ROOTFS_IMAGE** is a type of rootfs image used for downloading the Mendix app dependencies and compiling the Mendix app from source. Defaults to `mendix/rootfs:bionic`. To use Ubuntu 14.04, change this to `mendix/rootfs:trusty`. It's also possible to use a custom rootfs image as described in [Advanced feature: full-build](#advanced-feature-full-build).
 - **CF_BUILDPACK** is a version of CloudFoundry buildpack. Defaults to `v4.9.4`. For stable pipelines, it's recommended to use a fixed version from **v4.9.4** and later.
 
 ### Startup
@@ -298,6 +300,7 @@ After that you can build the target image with the next command:
 docker build 
   --build-arg BUILD_PATH=<mendix-project-location> \
   --build-arg ROOTFS_IMAGE=<root-fs-image-tag> \
+  --build-arg BUILDER_ROOTFS_IMAGE=<builder-root-fs-image-tag> \
 	-t mendix/mendix-buildpack:v1.2 .
 ```
 
