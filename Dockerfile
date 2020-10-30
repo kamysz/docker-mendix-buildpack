@@ -14,6 +14,8 @@ ARG DD_API_KEY
 # CF buildpack version
 ARG CF_BUILDPACK=v4.12.0
 
+ARG BLOBSTORE="https://cdn.mendix.com"
+
 # Each comment corresponds to the script line:
 # 1. Create all directories needed by scripts
 # 2. Download CF buildpack
@@ -39,7 +41,7 @@ COPY $BUILD_PATH /opt/mendix/build
 RUN chmod +rx /opt/mendix/buildpack/bin/bootstrap-python && /opt/mendix/buildpack/bin/bootstrap-python /opt/mendix/buildpack /tmp/buildcache
 
 # Add the buildpack modules
-ENV PYTHONPATH "$PYTHONPATH:/opt/mendix/buildpack/lib/:/opt/mendix/buildpack/:/opt/mendix/buildpack/lib/python3.6/site-packages/"
+ENV PYTHONPATH="$PYTHONPATH:/opt/mendix/buildpack/lib/:/opt/mendix/buildpack/:/opt/mendix/buildpack/lib/python3.6/site-packages/" BLOBSTORE=$BLOBSTORE
 
 # Each comment corresponds to the script line:
 # 1. Create cache directory and directory for dependencies which can be shared
