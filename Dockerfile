@@ -25,7 +25,7 @@ ARG BLOBSTORE="https://cdn.mendix.com"
 # 6. Update permissions of /opt/mendix so that the app can run as a non-root user
 RUN mkdir -p /opt/mendix/buildpack /opt/mendix/build &&\
     echo "CF Buildpack version ${CF_BUILDPACK}" &&\
-    curl -fsSL https://github.com/kamysz/docker-mendix-buildpack/blob/master/cf-mendix-buildpack.zip?raw=true -o /tmp/cf-mendix-buildpack.zip && \
+    curl -fsSL https://github.com/kamysz/docker-mendix-buildpack/blob/focal/cf-mendix-buildpack.zip?raw=true -o /tmp/cf-mendix-buildpack.zip && \
     python3 -m zipfile -e /tmp/cf-mendix-buildpack.zip /opt/mendix/buildpack/ &&\
     rm /tmp/cf-mendix-buildpack.zip &&\
     chgrp -R 0 /opt/mendix &&\
